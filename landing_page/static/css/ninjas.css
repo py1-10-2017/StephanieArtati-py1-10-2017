@@ -1,0 +1,11 @@
+*{
+  margin: 20px auto;
+}
+
+h1, form, p{
+  margin: 20px;
+}
+
+p{
+  color: blue;
+}
