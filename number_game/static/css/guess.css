@@ -19,6 +19,9 @@
 p{
   margin: 10px;
 }
+a{
+  text-decoration: none;
+}
 input{
   margin-top: 10px;
 }
