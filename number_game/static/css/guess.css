@@ -1,0 +1,29 @@
+#wrapper{
+  width: 100%;
+  margin: 0px auto;
+  text-align: center;
+}
+.hint{
+  color: white;
+  width: 200px;
+  height: 100px;
+  margin: 0px auto;
+  padding: 20px;
+  background-color: red;
+  font-size: 16px;
+  font-weight: bold;
+}
+.green{
+  background-color: green;
+}
+p{
+  margin: 10px;
+}
+input{
+  margin-top: 10px;
+}
+#play_again{
+  margin: auto;
+  margin-top: 20px;
+  display: block;
+}
