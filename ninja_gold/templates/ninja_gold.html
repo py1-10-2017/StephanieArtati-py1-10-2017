@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ninja Gold</title>
+    <link rel="stylesheet" type="text/css" href={{url_for('static', filename="css/ninja_gold.css")}}>
+  </head>
+  <body>
+    <div id = "wrapper">
+      <div id = "score">
+        Your Gold: <input type="text" name="score" value="{{session['score']}}" readonly>
+      </div>
+      <div id = "buildings">
+        <div class = "building_card">
+          <h3>Farm</h3>
+          <p>(earns 10-20 golds)</p>
+          <form action="/process_money" method="post">
+            <input type="hidden" name="building" value="farm" />
+            <input type="submit" value="Find Gold!"/>
+          </form>
+        </div>
+        <div class = "building_card">
+          <h3>Cave</h3>
+          <p>(earns 5-10 golds)</p>
+          <form action="/process_money" method="post">
+            <input type="hidden" name="building" value="cave" />
+            <input type="submit" value="Find Gold!"/>
+          </form>
+        </div>
+        <div class = "building_card">
+          <h3>House</h3>
+          <p>(earns 2-5 golds)</p>
+          <form action="/process_money" method="post">
+            <input type="hidden" name="building" value="house" />
+            <input type="submit" value="Find Gold!"/>
+          </form>
+        </div>
+        <div class = "building_card">
+          <h3>Casino</h3>
+          <p>(earns/takes 0-50 golds)</p>
+          <form action="/process_money" method="post">
+            <input type="hidden" name="building" value="casino" />
+            <input type="submit" value="Find Gold!"/>
+          </form>
+        </div>
+      </div>
+      <p>Activities:</p>
+      <div id="activities">
+        {% for activity in session['activities'] %}
+          {% if activity['flag'] == 1 %}
+            <p><span class="green">Earned {{activity['winning']}} golds from the {{activity['building']}}! ({{activity['time']}})</span></p>
+          {% elif activity['flag'] == 0 %}
+            <p><span class="red">Entered a casino and lost {{activity['winning']}} golds... Ouch.. ({{activity['time']}})</span></p>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
