@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request, session, flash
 
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
+PASSWORD_REGEX = re.compile(r'^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])')
 
 app = Flask(__name__)
 app.secret_key = 'KeepItSecretKeepItSafe'
@@ -37,12 +38,15 @@ def process_registration():
   if len(password) < 8:
       flash("Password must be at least 8 characters")
       validation = False
-  if password.isalpha() or password.isnumeric():
-      flash("Password must contain at least 1 alphabet and 1 numeric characters")
+  elif not PASSWORD_REGEX.match(password):
+      flash("Password must contain at least 1 uppercase, 1 lowercase, and 1 numeric characters")
       validation = False
-  if password.islower() or password.isupper():
-       flash("Password must contain at least 1 uppercase and 1 lowercase character")
-       validation = False
+  # if password.isalpha() or password.isnumeric():
+  #     flash("Password must contain at least 1 alphabet and 1 numeric characters")
+  #     validation = False
+  # if password.islower() or password.isupper():
+  #      flash("Password must contain at least 1 uppercase and 1 lowercase character")
+  #      validation = False
   if password != confirm_password:
       flash("Passwords don't match")
       validation = False
