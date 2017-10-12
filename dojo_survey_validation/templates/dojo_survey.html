@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dojo Survey</title>
+    <link rel="stylesheet" type="text/css" href={{url_for('static', filename="css/dojo_survey.css")}}>
+  </head>
+  <body>
+    <div id = "form_wrapper">
+      <form action='/result' method="post">
+        <div>
+          <label>Your Name:</label>
+          {% if name %}
+            <input type="text" name="name" value="{{name}}" style='width:150px'>
+          {% else %}
+            <input type="text" name="name" style='width:150px'>
+          {% endif %}
+        </div>
+        <div>
+          <label>Dojo Location:</label>
+          <select name="location" style='width:150px'>
+            <option value="seattle">Seattle</option>
+            <option value="silicon valley">San Jose</option>
+            <option value="los angeles">Los Angeles</option>
+            <option value="atlanta">Atlanta</option>
+          </select>
+        </div>
+        <div>
+          <label>Favorite Language:</label>
+          <select name="language" style='width:150px'>
+            <option value="python">Python</option>
+            <option value="java">JAVA</option>
+            <option value="php">PHP</option>
+            <option value="c#">C#</option>
+          </select>
+        </div>
+        <div>
+          <label>Comment (Optional):</label>
+          {% if comment %}
+            <textarea rows="5" cols="45" name="comment">{{comment}}</textarea>
+          {% else %}
+            <textarea rows="5" cols="45" name="comment"></textarea>
+          {% endif %}
+        </div>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <p class="red">{{message}}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <div>
+          <input type="submit">
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
