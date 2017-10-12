@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Registration</title>
+    <link rel="stylesheet" type="text/css" href={{url_for('static', filename="css/registration.css")}}>
+  </head>
+  <body>
+    <div id = "form_wrapper">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <p class="red">{{message}}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <form action='/process_registration' method="post">
+        <div>
+          <label>Email:</label>
+          {% if email %}
+            <input type="text" name="email" value="{{email}}" style='width:150px'>
+          {% else %}
+            <input type="text" name="email" style='width:150px'>
+          {% endif %}
+        </div>
+        <div>
+          <label>First Name:</label>
+          {% if first_name %}
+            <input type="text" name="first_name" value="{{first_name}}" style='width:150px'>
+          {% else %}
+            <input type="text" name="first_name" style='width:150px'>
+          {% endif %}
+        </div>
+        <div>
+          <label>Last Name:</label>
+          {% if last_name %}
+            <input type="text" name="last_name" value="{{last_name}}" style='width:150px'>
+          {% else %}
+            <input type="text" name="last_name" style='width:150px'>
+          {% endif %}
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type="password" name="password" style='width:150px'>
+        </div>
+        <div>
+          <label>Confirm Password:</label>
+          <input type="password" name="confirm_password" style='width:150px'>
+        </div>
+        <div>
+          <input type="submit">
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
