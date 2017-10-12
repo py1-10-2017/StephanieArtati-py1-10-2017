@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ninja Turtle</title>
+    <link rel="stylesheet" type="text/css" href={{url_for('static', filename="css/ninja.css")}}>
+  </head>
+  <body>
+    <div id = "wrapper">
+      {% for color in display_set %}
+        <div class = "ninja_card">
+        {% if color == "blue" %}
+          <img src={{url_for('static', filename="img/leonardo.jpg")}}>
+        {% elif color == "orange" %}
+          <img src={{url_for('static', filename="img/michelangelo.jpg")}}>
+        {% elif color == "red" %}
+          <img src={{url_for('static', filename="img/raphael.jpg")}}>
+        {% elif color == "purple" %}
+          <img src={{url_for('static', filename="img/donatello.jpg")}}>
+        {% elif color == "other" %}
+          <img src={{url_for('static', filename="img/notapril.jpg")}}>
+        {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>

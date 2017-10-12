@@ -1,0 +1,17 @@
+#wrapper{
+  width: 100%;
+  margin: 0px auto;
+  padding: 20px;
+}
+.ninja_card{
+  display: inline-block;
+  width: 20%;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid lightgrey;
+  text-align: center;
+}
+
+img{
+  width: 100%;
+}
