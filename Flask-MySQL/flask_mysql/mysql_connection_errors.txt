@@ -1,0 +1,21 @@
+1. Wrong password, must supply correct password
+
+(1045, "Access denied for user 'root'@'localhost' (using password: YES)")
+
+2. Wrong port, must use active port
+
+(2003, "Can't connect to MySQL server on '127.0.0.1' (10061)")
+
+3. Non-existent db
+
+(1049, "Unknown database 'friendshipss'")
+
+4. Non-existent table
+
+(1146, "Table 'friendships.user' doesn't exist") [SQL: 'SELECT * FROM user']
+
+
+
+
+
+
