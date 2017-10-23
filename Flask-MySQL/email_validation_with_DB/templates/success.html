@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Email Registration</title>
+    <link rel="stylesheet" type="text/css" href={{url_for('static', filename="css/registration.css")}}>
+  </head>
+  <body>
+    <div id = "output_wrapper">
+      <button class="green">The email address you entered ({{email}}) is a VALID email address! Thank you!</button>
+      <h3> Email addresses entered: </h3>
+      {% for email in email_list %}
+        <p>{{email['email'] }}    {{email['created_at']}}</p>
+      {% endfor %}
+    </div>
+
+  </body>
+</html>

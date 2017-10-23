@@ -1,0 +1,44 @@
+*{
+  margin: 0px;
+}
+#form_wrapper{
+  margin: 10px;
+  width: 350px;
+}
+input, select{
+  float: right;
+  margin: 10px;
+}
+div{
+  clear: both;
+}
+form{
+  margin: 0px;
+  margin-top: 20px
+}
+#output_wrapper{
+  width: 400px;
+  margin: 10px;
+  padding: 20px;
+  /*border: 1px solid black;*/
+}
+h3{
+  text-decoration: underline;
+  font-weight: normal;
+}
+p{
+  display: inline-block;
+  margin: 0px;
+}
+button.red{
+  display: block;
+  background-color: red;
+  color: white;
+  margin: 10px;
+}
+button.green{
+  display: block;
+  background-color: green;
+  color: white;
+  margin: 10px;
+}
