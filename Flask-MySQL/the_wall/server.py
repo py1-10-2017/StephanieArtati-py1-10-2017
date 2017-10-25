@@ -5,6 +5,9 @@ from mysqlconnection import MySQLConnector
 from flask_bcrypt import Bcrypt
 # import regex
 import re
+# import time
+from datetime import datetime
+import time
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
 # PASSWORD_REGEX = re.compile(r'^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])')
 
@@ -14,7 +17,7 @@ app.secret_key = 'KeepItSecretKeepItSafe'
 # connect and store the connection in "mysql" note that you pass the database name to the function
 mysql = MySQLConnector(app, 'wall_database')
 # an example of running a query
-print(mysql.query_db("SELECT * FROM users"))
+# print(mysql.query_db("SELECT * FROM users"))
 
 
 @app.route('/')
@@ -26,6 +29,16 @@ def index():
         messages = mysql.query_db("SELECT * FROM messages ORDER BY created_at DESC")
         for message in messages:
             creator_id = message['user_id']
+            fmt = '%Y-%m-%d %H:%M:%S'
+            creation_timestamp = datetime.strptime(str(message['created_at']), fmt)
+            creation_unix = time.mktime(creation_timestamp.timetuple())
+            now_unix = time.mktime(datetime.now().timetuple())
+            message_age = int(now_unix - creation_unix)/60
+
+            if creator_id == session['user_id'] and message_age < 30:
+                message['can_delete'] = True
+            else:
+                message['can_delete'] = False
             query = "SELECT * FROM users where id=:user_id"
             data = {'user_id': creator_id}
             user = mysql.query_db(query, data)
@@ -52,6 +65,14 @@ def post_message():
     query = "INSERT INTO messages (`message`,`user_id`,`created_at`,`updated_at`) VALUES (:message, :user_id, now(), now());"
     data = {'message': request.form['message'], 'user_id': session['user_id']}
     new_message = mysql.query_db(query, data)
+    return redirect('/')
+
+@app.route('/delete_message', methods=['POST'])
+def delete_message():
+    # print("*****"+request.form['message_id'])
+    query = "DELETE FROM messages where id=:message_id"
+    data = {'message_id': request.form['message_id']}
+    mysql.query_db(query, data)
     return redirect('/')
 
 @app.route('/post_comment', methods=['POST'])
