@@ -34,8 +34,9 @@ class Product(object):
                 self.price *= 0.8
         return self
 
-Product1 = Product(200,"Toddler shoes",1, "Carter's","for sale")
-Product1.sell()
-Product1.display_all()
-Product1.return_product("used")
-Product1.display_all()
+if __name__ == "__main__":
+    Product1 = Product(200,"Toddler shoes",1, "Carter's","for sale")
+    Product1.sell()
+    Product1.display_all()
+    Product1.return_product("used")
+    Product1.display_all()
