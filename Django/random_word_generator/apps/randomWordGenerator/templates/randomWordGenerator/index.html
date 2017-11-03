@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Random Word</title>
+    {% load static %}
+     <!-- The line above tells Django to be ready to listen for static files -->
+    <link rel="stylesheet" href="{% static 'randomWordGenerator/css/randomWordGenerator.css' %}" media="screen" title="no title"  charset="utf-8">
+  </head>
+  <body>
+    <div id = "header">
+      <p>Random Word (attempt #{{counter}}) </p>
+    </div>
+    <div id = "random_word">
+      <h3>{{random_word}}</h3>
+    </div>
+    <form action="/" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="Generate">
+    </form>
+  </body>
+</html>
