@@ -1,0 +1,44 @@
+#main_form, #header_form{
+  width: 30%;
+  margin: 20px auto;
+  padding: 10px;
+  border: 1px solid lightgrey;
+  overflow: hidden;
+}
+#header_form{
+  background-color: green;
+  color: white;
+  padding: 0px 10px;
+}
+input, select, span.field_value{
+  margin: 5px;
+  float: right;
+  clear: both;
+}
+
+p.comment{
+  margin: 0px;
+}
+label, p{
+  margin: 20px;
+}
+div.field{
+  width: 100%;
+  overflow: hidden;
+}
+h4{
+  text-decoration: underline;
+}
+textarea{
+  margin: 0px 20px;
+  width: 92%;
+  height: 50px;
+}
+#submit_button{
+  background-color: blue;
+  color: white;
+  float: right;
+  border: none;
+  padding: 5px;
+  margin : 10px 5px;
+}
