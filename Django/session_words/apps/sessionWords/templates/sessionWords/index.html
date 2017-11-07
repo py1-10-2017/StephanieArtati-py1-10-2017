@@ -30,21 +30,9 @@
           </form>
           {% for word in request.session.words_list %}
             {% if word.big_font == False %}
-              {% if word.color == 'red'%}
-                <p><span class="red">{{word.word}}</span> --- added on {{word.time}}</p>
-              {% elif word.color == "green" %}
-                <p><span class="green">{{word.word}}</span> --- added on {{word.time}}</p>
-              {% elif word.color == "blue" %}
-                <p><span class="blue">{{word.word}}</span> --- added on {{word.time}}</p>
-              {% endif %}
+              <p><span class="{{word.color}}">{{word.word}}</span> --- added on {{word.time}}</p>
             {% else %}
-              {% if word.color == 'red'%}
-                <p><span class="red big">{{word.word}}</span> --- added on {{word.time}}</p>
-              {% elif word.color == "green" %}
-                <p><span class="green big">{{word.word}}</span> --- added on {{word.time}}</p>
-              {% elif word.color == "blue" %}
-                <p><span class="blue big">{{word.word}}</span> --- added on {{word.time}}</p>
-              {% endif %}
+              <p><span class="{{word.color}} big">{{word.word}}</span> --- added on {{word.time}}</p>
             {% endif %}
           {% endfor %}
       </div>
