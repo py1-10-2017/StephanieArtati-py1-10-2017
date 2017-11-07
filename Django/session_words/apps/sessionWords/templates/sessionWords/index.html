@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Session Words</title>
+    {% load static %}
+     <!-- The line above tells Django to be ready to listen for static files -->
+    <link rel="stylesheet" href="{% static 'sessionWords/css/sessionWords.css' %}" media="screen" title="no title"  charset="utf-8">
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="input_form">
+        <form action="/process_form" method="POST">
+          {% csrf_token %}
+          <h3>Add a new word</h3>
+          <input type="text" name="word">
+          <p>Choose color</p>
+          <input type="radio" name="color" value="red"> Red<br>
+          <input type="radio" name="color" value="green"> Green<br>
+          <input type="radio" name="color" value="blue" checked> Blue<br><br>
+          <input type="checkbox" name="font_size" value="big" unchecked> show in BIG fonts!<br><br>
+
+          <input id="submit_button" type="submit" value="Add to Session">
+        </form>
+      </div>
+      <div id="session_output">
+          <form action="/reset" method="POST">
+            {% csrf_token %}
+            <input id="clear_session_button" type="submit" value="Clear Session">
+          </form>
+          {% for word in request.session.words_list %}
+            {% if word.big_font == False %}
+              {% if word.color == 'red'%}
+                <p><span class="red">{{word.word}}</span> --- added on {{word.time}}</p>
+              {% elif word.color == "green" %}
+                <p><span class="green">{{word.word}}</span> --- added on {{word.time}}</p>
+              {% elif word.color == "blue" %}
+                <p><span class="blue">{{word.word}}</span> --- added on {{word.time}}</p>
+              {% endif %}
+            {% else %}
+              {% if word.color == 'red'%}
+                <p><span class="red big">{{word.word}}</span> --- added on {{word.time}}</p>
+              {% elif word.color == "green" %}
+                <p><span class="green big">{{word.word}}</span> --- added on {{word.time}}</p>
+              {% elif word.color == "blue" %}
+                <p><span class="blue big">{{word.word}}</span> --- added on {{word.time}}</p>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

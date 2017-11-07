@@ -1,0 +1,46 @@
+#wrapper{
+  width: 70%;
+  margin: 0px auto;
+}
+#input_form{
+  width: 30%;
+  border-right: 1px solid black;
+  display: inline-block;
+}
+
+#session_output{
+  vertical-align: top;
+  margin-left: 20px;
+  width: 60%;
+  display: inline-block;
+  /*background-color: grey;*/
+}
+
+#submit_button{
+  padding: 5px;
+  background-color: blue;
+  color: white;
+  border: none;
+}
+
+#clear_session_button{
+  display: block;
+  margin: 10px;
+  padding: 5px;
+  background-color: red;
+  color: white;
+  border: none;
+}
+span.big{
+  font-size: 20px;
+  font-weight: bold;
+}
+span.red{
+  color: red;
+}
+span.green{
+  color: green;
+}
+span.blue{
+  color: blue;
+}
