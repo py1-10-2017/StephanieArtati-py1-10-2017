@@ -29,6 +29,7 @@ def process_form(request):
         "time": t_str,
         "big_font": big_font_size
     }
+    # interestingly, an online post suggests appending to Django session list doesn't work, the workaround seems to be by introducing and modifying another session field as above
     request.session['words_list'].append(new_word_dict)
     print(request.session['words_list'])
     return redirect('/')
