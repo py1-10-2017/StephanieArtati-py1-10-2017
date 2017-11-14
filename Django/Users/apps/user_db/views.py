@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, HttpResponse
 from .models import User
 from validate_email import validate_email
 from django.contrib import messages
+
+import re # alternative email validation with regex
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$') # regex pattern for email
 # Create your views here.
 def index(request):
     users_list = User.objects.all()
