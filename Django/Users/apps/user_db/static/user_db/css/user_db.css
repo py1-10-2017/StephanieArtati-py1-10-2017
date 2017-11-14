@@ -1,0 +1,35 @@
+#wrapper{
+  /*width: 50%;*/
+
+}
+table {
+    border-collapse: collapse;
+    margin: 20px 0px;
+}
+table, th, td {
+    border: 1px solid black;
+    padding: 10px;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+.error{
+  color: red;
+}
+label{
+  margin: 10px;
+  display: inline-block;
+  /*float: left;*/
+  /*clear: left;*/
+  width: 100px;
+  text-align: right;
+}
+input {
+  margin: 10px;
+  display: inline-block;
+  /*float: left;*/
+}
+
+.submit{
+  margin: 10px 0px;
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Users Database</title>
+    {% load static %}
+   <link rel="stylesheet" type="text/css" href="{% static 'user_db/css/user_db.css' %}">
+	</head>
+	<body>
+    <div id = "wrapper">
+      <h4>User {{user.id}}</h4>
+    	Full Name: {{user.first_name}} {{user.last_name}} <br>
+			Email: {{user.email_address}} <br>
+			Created at: {{user.created_at}} <br>
+			<br>
+			<a href="/users/{{user.id}}/edit">Edit</a> | <a href="/users/{{user.id}}/destroy">Delete</a>
+    </div>
+  </body>
+</html>
