@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Delete Confirmation</title>
+    {% load static %}
+   <link rel="stylesheet" type="text/css" href="{% static 'courses_db/css/courses_db.css' %}">
+	</head>
+	<body>
+    <h3>Are you sure you want to delete the following course?</h3>
+    Name: {{course.name}} <br>
+		Description: {{course.description}}<br><br>
+		<a class="link_button" href="/">No</a>
+		<a class="link_button red" href="/courses/{{course.id}}/destroy">Yes! I want to delete this</a>
+	</body>
+</html>
