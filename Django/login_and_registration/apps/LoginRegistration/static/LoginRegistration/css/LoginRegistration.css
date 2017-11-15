@@ -1,0 +1,39 @@
+*{
+  margin: 0px;
+}
+#login_wrapper, #registration_wrapper{
+  margin: 10px;
+  width: 350px;
+}
+input{
+  float: right;
+  margin: 5px;
+  display: inline-block;
+}
+div{
+  clear: both;
+}
+form{
+  margin: 0px;
+  margin-top: 20px
+}
+#output_wrapper{
+  width: 400px;
+  margin: 10px;
+  padding: 20px;
+  /*border: 1px solid black;*/
+}
+h3{
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+.error{
+  color: red;
+  margin: 10px;
+}
+
+p.green{
+  color: green;
+  margin: 10px 0px;
+}

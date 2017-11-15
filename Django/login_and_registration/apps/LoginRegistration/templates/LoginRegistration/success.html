@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'LoginRegistration/css/LoginRegistration.css' %}">
+  </head>
+  <body>
+    <div id = "output_wrapper">
+      Success! Welcome, {{request.session.first_name}}!
+      {% if request.session.logged_in %}
+        <p class="green">Successfully logged in!</p>
+      {% else %}
+        <p class="green">Successfully registered!</p>
+      {% endif %}
+    </div>
+  </body>
+</html>
