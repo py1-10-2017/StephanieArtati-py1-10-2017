@@ -1,13 +1,14 @@
 from __future__ import unicode_literals
 from django.db import models
-from datetime import date
+from datetime import date, datetime
+import bcrypt
 
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$') # regex pattern for email
 
 # Create your models here.
 class UserManager(models.Manager):
-    def validate(self, postData):
+    def validate_registration(self, postData):
         errors = {}
         if len(postData['first_name']) < 2:
             errors["first_name"] = "First name can't be fewer than 2 characters"
@@ -35,6 +36,22 @@ class UserManager(models.Manager):
                 errors['birthday'] = "Birthday must be prior to today"
         except:
             errors['birthday'] = "Invalid or unspecified birthdate"
+
+        if len(errors) == 0: #insert into DB
+            first_name = postData['first_name']
+            last_name = postData['last_name']
+            email_address = postData['email_address']
+
+            password_raw = postData['password']
+            password_hash = bcrypt.hashpw(password_raw.encode(), bcrypt.gensalt())
+
+            birthdate_str = postData['birthdate']
+            birthdate_yyyymmdd = birthdate_str.split('-')
+            birthdate = date(int(birthdate_yyyymmdd[0]), int(birthdate_yyyymmdd[1]), int(birthdate_yyyymmdd[2]))
+            birthdatetime = datetime.combine(birthdate, datetime.min.time())
+
+            User.objects.create(first_name=first_name, last_name=last_name, email_address=email_address, birthdate=birthdatetime, password=password_hash)
+
         return errors
 
 class User(models.Model):

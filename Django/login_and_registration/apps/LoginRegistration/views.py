@@ -13,7 +13,7 @@ def success(request):
 
 def process_registration(request):
 
-    errors = User.objects.validate(request.POST)
+    errors = User.objects.validate_registration(request.POST)
     request.session["registration"] = True
     request.session["login"] = False
     if len(errors):
@@ -22,18 +22,6 @@ def process_registration(request):
         return redirect('/')
     else:
         first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        email_address = request.POST['email_address']
-
-        password_raw = request.POST['password']
-        password_hash = bcrypt.hashpw(password_raw.encode(), bcrypt.gensalt())
-
-        birthdate_str = request.POST['birthdate']
-        birthdate_yyyymmdd = birthdate_str.split('-')
-        birthdate = date(int(birthdate_yyyymmdd[0]), int(birthdate_yyyymmdd[1]), int(birthdate_yyyymmdd[2]))
-        birthdatetime = datetime.combine(birthdate, datetime.min.time())
-
-        User.objects.create(first_name=first_name, last_name=last_name, email_address=email_address, birthdate=birthdatetime, password=password_hash)
         request.session['first_name'] = first_name
         return redirect('/success')
 
