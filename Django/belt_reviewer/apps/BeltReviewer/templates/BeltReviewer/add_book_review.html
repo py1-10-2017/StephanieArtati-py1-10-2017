@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Book Reviews</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'BeltReviewer/css/belt_reviewer.css' %}">
+  </head>
+  <body>
+    <div id="header">
+      <div id="header_nav">
+        <ul>
+          <li><a href="/add_book_review">Add Book and Review</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="book_review_wrapper">
+      <p class="heading">Add a New Book Title and a Review:</p>
+      <form action='/post_book_review' method="post">
+      {% csrf_token %}
+        <div class="form-group row">
+          <label class="col-3 col-form-label field-title">Book Title:</label>
+          <input class="form-control" type="text" name="title" style='width:330px'>
+        </div>
+        <div class="form-group">
+          <label class="field-title">Author:</label>
+          <div class="form-group row">
+             <label for="author_select" class="col-5 col-form-label">Choose from the list:</label>
+             <select class="form-control form-inline" name="author_select" style='width:250px'>
+               <option>1</option>
+               <option>2</option>
+               <option>3</option>
+               <option>4</option>
+               <option>5</option>
+             </select>
+           </div>
+           <div class="form-group row">
+             <label  class="col-5 col-form-label">Or add a new author:</label>
+             <input class="form-control" type="text" name="author_name" style='width:250px'>
+           </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-3 col-form-label field-title">Review:</label>
+          <textarea class="form-control" name="review" style='width:340px' rows="5"></textarea>
+        </div>
+        <div class="form-group row">
+           <label for="rating" class="col-3 col-form-label field-title">Rating:</label>
+           <select class="form-control form-inline" name="rating" style='width:70px'>
+             <option>1</option>
+             <option>2</option>
+             <option selected>3</option>
+             <option>4</option>
+             <option>5</option>
+           </select>
+         </div>
+        <div>
+          <input class="btn btn-primary float_right" type="submit" value="Add Book and Review">
+        </div>
+      </form>
+  </div>
+  </body>
+</html>

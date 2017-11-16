@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Book Reviews</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'BeltReviewer/css/belt_reviewer.css' %}">
+  </head>
+  <body>
+    <div id = "registration_wrapper">
+      <fieldset class="form-group">
+        <legend>Register</legend>
+        <form action='/process_registration' method="post">
+        {% csrf_token %}
+        {% if request.session.registration %}
+          {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }} error"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endif %}
+          <div class="form-group">
+            <label>Name:</label>
+            <input class="form-control" type="text" name="name" style='width:170px'>
+          </div>
+          <div>
+            <label>Alias:</label>
+            <input class="form-control" type="text" name="alias" style='width:170px'>
+          </div>
+          <div>
+            <label>Email:</label>
+            <input class="form-control" type="text" name="email" style='width:170px'>
+          </div>
+          <div>
+            <label>Password:</label>
+            <input class="form-control" type="password" name="password" style='width:170px'>
+          </div>
+          <p class="footnote">*Password must be at least 8 characters</p>
+          <div>
+            <label>Confirm Password:</label>
+            <input class="form-control" type="password" name="password_confirm" style='width:170px'>
+          </div>
+          <div>
+            <input class="btn btn-primary" type="submit" value="Register" style='width:170px'>
+          </div>
+        </form>
+      </fieldset>
+    </div>
+    <div id = "login_wrapper">
+      <fieldset>
+      <legend>Login</legend>
+        <form action='/process_login' method="post">
+        {% csrf_token %}
+        {% if request.session.login %}
+          {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }} error"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endif %}
+          <div>
+            <label>Email:</label>
+            <input class="form-control" type="text" name="email" style='width:170px'>
+          </div>
+          <div>
+            <label>Password:</label>
+            <input class="form-control" type="password" name="password" style='width:170px'>
+          </div>
+          <div>
+            <input class="btn btn-primary" type="submit" value="Login" style='width:170px'>
+          </div>
+        </form>
+      </fieldset>
+    </div>
+  </body>
+</html>
