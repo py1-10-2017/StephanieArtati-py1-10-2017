@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Book Reviews</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'BeltReviewer/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'BeltReviewer/css/belt_reviewer.css' %}">
+  </head>
+  <body>
+    <div id="header">
+      <div id="header_nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/add_book_review">Add Book and Review</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="user_info">
+      User alias: {{user.alias}}<br>
+      Name: {{user.name}}<br>
+      Email: {{user.email}}<br>
+      Total Reviews: {{num_reviews}}<br>
+      <br>
+      Posted reviews on the following books:
+      <ul>
+      {% for book in books %}
+        <li><a href="/books/{{book.id}}">{{book.title}}</a></li>
+      {% endfor %}
+      </ul>
+      </div>
+    </div>
+
+  </body>
+</html>

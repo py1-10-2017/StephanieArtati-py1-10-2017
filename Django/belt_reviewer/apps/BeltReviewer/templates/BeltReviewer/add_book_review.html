@@ -11,7 +11,7 @@
     <div id="header">
       <div id="header_nav">
         <ul>
-          <li><a href="/add_book_review">Add Book and Review</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="/logout">Logout</a></li>
         </ul>
       </div>
@@ -29,11 +29,9 @@
           <div class="form-group row">
              <label for="author_select" class="col-5 col-form-label">Choose from the list:</label>
              <select class="form-control form-inline" name="author_select" style='width:250px'>
-               <option>1</option>
-               <option>2</option>
-               <option>3</option>
-               <option>4</option>
-               <option>5</option>
+               {% for author in authors %}
+               <option>{{author.name}}</option>
+               {% endfor %}
              </select>
            </div>
            <div class="form-group row">

@@ -10,19 +10,20 @@
   </head>
   <body>
     <div id="header">
-      <h3>Welcome, {{request.session.user_alias}}!</h3>
       <div id="header_nav">
         <ul>
-          <li><a href="/add_book_review">Add Book and Review</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="/logout">Logout</a></li>
         </ul>
       </div>
     </div>
     <div id="recent_reviews">
-      <p class="heading">Recent Book Reviews:</p>
-      {% for review in recent_reviews %}
+      <p class="heading">{{book.title}}</p>
+      Author: {{book.author.name}}
+      <p class="heading">Reviews: </p>
+      {% for review in reviews %}
         <div class="reviews">
-          <a href="/books/{{review.book.id}}">{{review.book.title}}</a><br>
+          <hr>
           Rating:
           {% load my_filters %}
           {% for i in review.rating|times %}
@@ -35,19 +36,34 @@
           <a href="/users/{{review.user.id}}">{{review.user.alias}}</a> <span class="footnote"> says: {{review.review}}</span>
           <br><br>
           <span class="footnote">Posted on {{review.created_at}}</span>
+          {% if review.user.email == request.session.user_email %}
+          <a class="float-right small-font" href="/reviews/{{review.id}}/delete">Delete this Review</a>
+          {% endif %}
         </div>
       {% endfor %}
       </div>
     </div>
-    <div id="other_books">
-      <p class="heading">Other Books with Reviews:</p>
-      <div id="book_list">
-        <ul>
-          {% for book in other_books %}
-          <li><a href="/books/{{book.id}}">{{book.title}}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
+    <div id="add_review">
+      <form action='/books/{{book.id}}/add_review' method="post">
+      {% csrf_token %}
+        <div class="form-group">
+          <label for="review" class="col-5 col-form-label field-title">Add a Review:</label>
+          <textarea class="form-control" name="review" style='width:340px' rows="5"></textarea>
+        </div>
+        <div class="form-group row">
+           <label for="rating" class="col-3 col-form-label field-title">Rating:</label>
+           <select class="form-control form-inline" name="rating" style='width:70px'>
+             <option>1</option>
+             <option>2</option>
+             <option selected>3</option>
+             <option>4</option>
+             <option>5</option>
+           </select>
+         </div>
+         <div>
+           <input class="btn btn-primary float_right" type="submit" value="Submit Review">
+         </div>
+       </form>
     </div>
   </body>
 </html>

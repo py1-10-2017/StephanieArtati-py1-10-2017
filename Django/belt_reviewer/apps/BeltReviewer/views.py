@@ -5,12 +5,12 @@ from django.contrib import messages
 
 def index(request):
     try:
-        if request.session.logged_in == False:
+        if request.session["logged_in"] == False:
             return render(request,'BeltReviewer/login_reg.html')
         else:
-            pass #redirect to /books once ready
+            return redirect('/books')
     except:
-        request.session.logged_in = False
+        request.session["logged_in"] = False
         return render(request, 'BeltReviewer/login_reg.html')
 
 def process_registration(request):
@@ -51,11 +51,42 @@ def process_login(request):
                 request.session['user_email'] = user.email
                 return redirect('/books')
 
-def show_user_reviews(request):
-    return render(request, 'BeltReviewer/user_reviews.html')
+def show_reviews(request):
+    recent_reviews = Review.objects.raw("SELECT * FROM beltreviewer_review ORDER BY created_at DESC LIMIT 3")
+    exclude_id_list = []
+    for review in recent_reviews:
+        exclude_id_list.append(review.book.id)
+    other_books = Book.objects.exclude(id__in = exclude_id_list)
+
+    context = {
+        "recent_reviews": recent_reviews,
+        "other_books": other_books
+    }
+    return render(request, 'BeltReviewer/user_reviews.html', context)
 
 def add_book_review(request):
-    return render(request, 'BeltReviewer/add_book_review.html')
+    authors = Author.objects.all()
+    for author in authors:
+        print(author.name)
+    context = {
+        "authors": authors
+    }
+    return render(request, 'BeltReviewer/add_book_review.html', context)
+
+def add_review_to_book(request, book_id):
+
+    book = Book.objects.get(id=book_id)
+    user = User.objects.get(email=request.session['user_email'])
+    Review.objects.create(rating=int(request.POST['rating']), review=request.POST['review'], user=user, book=book)
+    return redirect('/books/{}'.format(book_id))
+
+def delete_review(request, review_id):
+    review = Review.objects.get(id=review_id)
+    book_id = review.book.id
+    if (review.user.email == request.session['user_email']): #revalidate review created by logged-in user
+        review.delete()
+
+    return redirect('/books/{}'.format(book_id))
 
 def post_book_review(request):
     title = request.POST['title']
@@ -85,7 +116,28 @@ def post_book_review(request):
     return redirect('books/{}'.format(book_object.id))
 
 def show_book_reviews(request, book_id):
-    return HttpResponse("placeholder for displaying book id: {}'s reviews".format(book_id))
+    book = Book.objects.get(id=book_id)
+    reviews = book.reviews.all()
+
+    context = {
+        "book": book,
+        "reviews": reviews
+    }
+    return render(request, 'BeltReviewer/book_reviews.html', context)
+
+def show_user(request, user_id):
+    user = User.objects.get(id=user_id)
+    reviews = user.reviews.all()
+    books = []
+    for review in reviews:
+        if review.book not in books:
+            books.append(review.book)
+    context = {
+        "user": user,
+        "num_reviews": len(reviews),
+        "books": books
+    }
+    return render(request, "BeltReviewer/user.html", context)
 
 def logout(request):
     request.session['logged_in'] = False

@@ -41,15 +41,19 @@ h3{
   margin: 10px;
 }
 
-p{
-  margin: 0px;
-}
 p.heading{
   font-weight: bold;
 }
-
+.reviews{
+  margin: 15px 0px;
+  font-size: 14px;
+}
 .footnote{
   font-style: italic;
+  font-size: 12px;
+}
+
+.small-font{
   font-size: 12px;
 }
 #header{
@@ -71,4 +75,43 @@ p.heading{
 
 .float_right{
   float: right;
+  clear: both;
+}
+
+#recent_reviews, #other_books, #add_review{
+  display: inline-block;
+  vertical-align: top;
+}
+
+#other_books ul li, #user_info ul li{
+  list-style-type: none;
+  font-size: 14px;
+}
+
+#other_books ul{
+  padding: 0px;
+}
+
+#recent_reviews, #user_info{
+  width: 50%;
+  padding: 20px;
+}
+
+#other_books, #add_review{
+  width: 30%;
+  padding: 20px;
+}
+
+#book_list{
+  height: 350px;
+  padding: 20px;
+  border: 1px solid lightgrey;
+}
+
+.orange{
+  color: orange;
+}
+
+.grey{
+  color: grey;
 }
