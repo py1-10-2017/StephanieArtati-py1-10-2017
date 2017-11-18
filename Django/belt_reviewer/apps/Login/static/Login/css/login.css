@@ -1,0 +1,74 @@
+*{
+  margin: 0px;
+}
+#login_wrapper, #registration_wrapper{
+  vertical-align: top;
+  display: inline-block;
+  margin: 10px;
+  width: 450px;
+  border: 1px solid lightgrey;
+  padding: 20px;
+}
+
+input{
+  /*float: right;*/
+  margin: 5px;
+  display: inline-block;
+}
+div{
+  clear: both;
+}
+form{
+  margin: 0px;
+  margin-top: 20px
+}
+
+.field-title{
+  font-weight: bold;
+}
+h3{
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+.error{
+  color: red;
+  margin: 10px;
+}
+
+p.heading{
+  font-weight: bold;
+}
+.reviews{
+  margin: 15px 0px;
+  font-size: 14px;
+}
+.footnote{
+  font-style: italic;
+  font-size: 12px;
+}
+
+.small-font{
+  font-size: 12px;
+}
+#header{
+  margin: 20px;
+}
+#header h3{
+  display: inline-block;
+  text-decoration: none;
+}
+#header_nav{
+  display: inline-block;
+  float: right;
+}
+#header_nav ul li{
+  list-style-type: none;
+  display: inline;
+  margin: 0px 10px;
+}
+
+.float_right{
+  float: right;
+  clear: both;
+}
