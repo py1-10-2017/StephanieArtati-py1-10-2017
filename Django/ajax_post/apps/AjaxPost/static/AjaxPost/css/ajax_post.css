@@ -1,0 +1,16 @@
+
+#wrapper{
+  padding: 20px;
+  width: 90%;
+  margin: auto;
+}
+.note{
+  vertical-align: top;
+  display: inline-block;
+  width: 25%;
+  margin: 20px 0px;
+  height: 150px;
+  border: 1px solid lightgrey;
+  padding: 20px;
+  border-radius: 5px;
+}
