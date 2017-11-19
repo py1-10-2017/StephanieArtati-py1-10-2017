@@ -66,16 +66,18 @@
           $(document).on('submit', '.delete_note', function(e) {
                 console.log("In delete note form submit handler")
                 e.preventDefault()
+                console.log($(this).html())
                 $.ajax({
                       url: '/delete', /* Where should this go? */
                       method: 'post',
                       data: $(this).serialize(),
                       success: function(serverResponse) {  /* What code should we run when the server responds? */
                         console.log("Successful server response: "+serverResponse)
-                        console.log("Parent: "+$(this).parent())
-                        $(this).parent().remove()  //this remove doesn't work
+                        console.log("Self: "+$(this).html())
+                        // $(this).parent().remove()  //$(this) is not accessible from this function
                       }
                 });
+                $(this).parent().remove()
             });
         });
     </script>
