@@ -1,0 +1,27 @@
+#wrapper{
+  padding: 20px;
+  width: 90%;
+  margin: auto;
+}
+
+#add_note{
+  margin: 20px;
+}
+.note{
+  vertical-align: top;
+  display: inline-block;
+  width: 60%;
+  margin: 20px 0px;
+  height: 150px;
+  border-top: 1px solid lightgrey;
+  padding: 20px;
+
+}
+
+.delete_link{
+  border: none;
+  background: none;
+  float: right;
+  color: blue;
+  cursor: pointer;
+}

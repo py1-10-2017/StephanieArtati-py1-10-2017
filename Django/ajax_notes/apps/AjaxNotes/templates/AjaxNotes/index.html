@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ajax Notes</title>
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'AjaxNotes/css/ajax_notes.css' %}">
+  </head>
+  <body>
+    <div id="wrapper">
+      <h2>Notes</h2>
+      <div id="notes">
+        {% for note in notes %}
+          <div class="note">
+          <form class="delete_note" action="/delete" method="POST">
+          {% csrf_token %}
+          {{note.title}}
+          <input type="hidden" name="note_id" value={{note.id}}>
+          <input class="delete_link" type="submit" value="Delete">
+          <textarea class="form-control col-12 col-form-label" rows="5" name="description" placeholder="{{note.description}}"></textarea>
+          </form>
+          </div>
+        {% endfor %}
+      </div>
+      <div id="add_note">
+        <form action="/add" method="POST" id="add_note_submit">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="note">New title:</label>
+          <input type="text" id="new_title" class="form-control col-7 col-form-label" name="title" placeholder="Insert note title here">
+        </div>
+        <input type="submit" value="Add Note">
+        </form>
+      </div>
+    </div>
+    <script>
+    $('#add_note_submit').submit(function(e){
+        console.log("In add note form submit handler")
+        e.preventDefault()
+        $.ajax({
+              url: '/add', /* Where should this go? */
+              method: 'post',
+              data: $(this).serialize(),
+              success: function(serverResponse) {  /* What code should we run when the server responds? */
+                console.log("Successful server response: "+serverResponse)
+                append_html_str = "<div class='note'><form class='delete_note' action='/delete' method='POST'>{% csrf_token %}"+$('#new_title').val()+"<input type='hidden' name='note_id' value="+serverResponse+'><input class="delete_link" type="submit" value="Delete"><textarea class="form-control col-12 col-form-label" rows="5" name="description" placeholder="Enter a description here..."></textarea></form></div>'
+                $('#notes').append(append_html_str)
+              }
+          });
+      });
+      $(document).ready(function(){
+          // use on to attach handler for dynamic card class
+          $(document).on('focusout','textarea',function() {
+            console.log("In textarea focusout handler")
+            $.ajax({
+                  url: '/update_description', /* Where should this go? */
+                  method: 'post',
+                  data: $(this).parent().serialize(),
+                  success: function(serverResponse) {  /* What code should we run when the server responds? */
+                    console.log("Successful server response: "+serverResponse)
+                  }
+              });
+            });
+          $(document).on('submit', '.delete_note', function(e) {
+                console.log("In delete note form submit handler")
+                e.preventDefault()
+                $.ajax({
+                      url: '/delete', /* Where should this go? */
+                      method: 'post',
+                      data: $(this).serialize(),
+                      success: function(serverResponse) {  /* What code should we run when the server responds? */
+                        console.log("Successful server response: "+serverResponse)
+                        console.log("Parent: "+$(this).parent())
+                        $(this).parent().remove()  //this remove doesn't work
+                      }
+                });
+            });
+        });
+    </script>
+  </body>
+</html>
