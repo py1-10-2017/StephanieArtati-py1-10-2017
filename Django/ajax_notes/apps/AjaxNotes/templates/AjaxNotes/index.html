@@ -73,7 +73,7 @@
                       data: $(this).serialize(),
                       success: function(serverResponse) {  /* What code should we run when the server responds? */
                         console.log("Successful server response: "+serverResponse)
-                        console.log("Self: "+$(this).html())
+                        // console.log("Self: "+$(this).html())
                         // $(this).parent().remove()  //$(this) is not accessible from this function
                       }
                 });
