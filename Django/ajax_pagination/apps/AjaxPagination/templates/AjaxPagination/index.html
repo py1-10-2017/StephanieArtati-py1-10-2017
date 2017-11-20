@@ -70,8 +70,15 @@
               method: 'get',
               data: {"name": $(this).val()},
               success: function(serverResponse) {  /* What code should we run when the server responds? */
-                console.log("Successful server response: "+serverResponse)
-                $('#user_list').html(serverResponse)
+                data = JSON.parse(serverResponse)
+                console.log("Successful server response: "+data['list'])
+                $('#user_list').html(data['list'])
+                num_page = data['num_page']
+                pagination_str = "";
+                for (i=1; i<=num_page; i++){
+                  pagination_str += "<form class='paginate' action='/show' method='POST'>{% csrf_token %}<input class='pagination' type='submit' value='"+i+"'><input type='hidden' name='page_number' value='"+i+"'></form>|"
+                }
+                $('#pagination').html(pagination_str)
               }
         });
       });
@@ -83,8 +90,15 @@
                 method: 'get',
                 data: {"start": $(this).val()},
                 success: function(serverResponse) {  /* What code should we run when the server responds? */
-                  console.log("Successful server response: "+serverResponse)
-                  $('#user_list').html(serverResponse)
+                  data = JSON.parse(serverResponse)
+                  console.log("Successful server response: "+data['list'])
+                  $('#user_list').html(data['list'])
+                  num_page = data['num_page']
+                  pagination_str = "";
+                  for (i=1; i<=num_page; i++){
+                    pagination_str += "<form class='paginate' action='/show' method='POST'>{% csrf_token %}<input class='pagination' type='submit' value='"+i+"'><input type='hidden' name='page_number' value='"+i+"'></form>|"
+                  }
+                  $('#pagination').html(pagination_str)
                 }
           });
       });
@@ -95,8 +109,15 @@
                 method: 'get',
                 data: {"end": $(this).val()},
                 success: function(serverResponse) {  /* What code should we run when the server responds? */
-                  console.log("Successful server response: "+serverResponse)
-                  $('#user_list').html(serverResponse)
+                  data = JSON.parse(serverResponse)
+                  console.log("Successful server response: "+data['list'])
+                  $('#user_list').html(data['list'])
+                  num_page = data['num_page']
+                  pagination_str = "";
+                  for (i=1; i<=num_page; i++){
+                    pagination_str += "<form class='paginate' action='/show' method='POST'>{% csrf_token %}<input class='pagination' type='submit' value='"+i+"'><input type='hidden' name='page_number' value='"+i+"'></form>|"
+                  }
+                  $('#pagination').html(pagination_str)
                 }
           });
       });
@@ -109,8 +130,9 @@
                       method: 'post',
                       data: $(this).serialize(),
                       success: function(serverResponse) {  /* What code should we run when the server responds? */
-                        console.log("Successful server response: "+serverResponse)
-                        $('#user_list').html(serverResponse)
+                        data = JSON.parse(serverResponse)
+                        console.log("Successful server response: "+data['list'])
+                        $('#user_list').html(data['list'])
                       }
                 });
             });

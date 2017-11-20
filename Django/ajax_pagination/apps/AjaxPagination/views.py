@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import *
+import json
 # Create your views here.
 def index(request):
     num_users = User.objects.all().count()
@@ -58,5 +59,9 @@ def show(request):
     for user in users:
         html_str += '<tr><td>'+str(user.id)+'</td><td>'+user.first_name+'</td><td>'+user.last_name+'</td><td>'+str(user.created_at).split(" ")[0]+'</td><td>'+user.email+'</td></tr>'
     html_str += '</table>'
-
-    return HttpResponse(html_str)
+    num_pages = int(users.count()/10)+1
+    response = {
+        "list": html_str,
+        "num_page": num_pages
+    }
+    return HttpResponse(json.dumps(response))
